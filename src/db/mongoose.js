@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 
-mongoose.connect(process.env.MONGODB_URL, {
+mongoose.connect('mongodb+srv://TaskManagerDB:Task@123456@cluster0-an0ha.mongodb.net/instagram?retryWrites=true', {
     useNewUrlParser: true,
     useCreateIndex:true,
-    useFindAndModify:false
+    useFindAndModify:false,
+    useUnifiedTopology:true
 })
