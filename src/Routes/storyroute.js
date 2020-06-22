@@ -79,4 +79,30 @@ router.get('/instagram/story/:id',async(req,res)=>{
     }
 })
 
+
+//query string :- pageno set this to greater than 0 (eg:- localhost:3000/instagram/allstory?pageno=1)
+router.get('/instagram/allstory',async(req,res)=>{
+    var pageno=parseInt(req.query.pageno)
+    //applied pagination
+    var query={
+        limit:4,
+        skip:4*(pageno-1)
+     }
+    try{
+        await Story.find({},{},query,(err,data)=>{
+            if(err)
+            {
+                res.status(404).send({error:'page not found'})
+            }
+            else{
+                res.status(200).send(data)
+            }
+        })
+       
+     }catch(e){
+         res.status(500).send(e)
+ 
+     }
+})
+
 module.exports=router
